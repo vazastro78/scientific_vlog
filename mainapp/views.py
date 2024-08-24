@@ -5,5 +5,6 @@ from django.shortcuts import render
 def index(request):
     context = {}
 
-    return render(request, 'mainapp/index.html', context)
+    return render(request, 'newsblog/main.html', context)
+#    return render(request, 'mainapp/index.html', context)
 
