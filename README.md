@@ -11,7 +11,7 @@
 - [x] Созданы директории и локальное окружение
 - [x] Создана база данных в posgress
 - [x] Сделаны настройки для github 
-- [x] 
+- [x] Создан проект django и приложение newblog
   - комментарий: 
 - [x] 
 
@@ -70,6 +70,20 @@ git push -u origin main
 git checkout -b basic_settings #создаем и переключаемся на новую ветку
 git checkout main
 
+git checkout -b django
 #git remote remove origin #удаляем связь с удаленным репозиторием
 #git clone git@github.com:vazastro78/scientific_vlog.git
+```
+
+### создаем проект django и приложение newsblog в нем
+
+```bash
+django-admin startproject config . #инициализируем проект
+pip3 install -r requirements.txt 
+
+python3 manage.py startapp newsblog
+touch newsblog/urls.py
+mkdir -p newsblog/templates/newsblog
+mkdir -p static/css static/js static/imagesmkdir -p media/
+
 ```
