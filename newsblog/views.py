@@ -18,13 +18,11 @@ class ArticleListView(ListView):
 
 
     model = Article
-    '''
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(is_published=True)
+        queryset = queryset.filter(is_visible=True)
         return queryset
-    '''
 
 
 class ArticleCreateView(CreateView):
@@ -37,7 +35,19 @@ class ArticleCreateView(CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            new_material = form.save()
-            new_material.slug = slugify(new_material.title)
-            new_material.save()
+            new_article = form.save()
+            new_article.slug = slugify(new_article.title)
+            new_article.save()
         return super().form_valid(form)
+
+class ArticleDetailView(DetailView):
+    model = Article
+    extra_context = {
+        'title': 'Страница просмотра отдельной статьи'
+    }
+    template_name = 'newsblog/article_view_single.html'
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.view_counts += 1
+        self.object.save()
+        return self.object

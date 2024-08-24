@@ -1,7 +1,6 @@
 {% extends 'newsblog/base.html' %}
 {% load path_tag_filter %}
 {% block content_ManyArticles %}
-{% for object in object_list %}
 
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-500 position-relative">
@@ -11,7 +10,7 @@
           <div class="mb-1 text-body-secondary">{{ object.updated_at }}</div>
           <div class="mb-1 text-body-secondary">Просмотров: {{ object.view_counts }}</div>
           <p class="mb-auto">{{ object.body }}</p>
-          <a href="{% url 'newsblog:view_single_article' object.pk %}" class="icon-link gap-1 icon-link-hover stretched-link">
+          <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
             Продолжить чтение
             <svg class="bi"><use xlink:href="#chevron-right"/></svg>
           </a>
@@ -22,5 +21,4 @@
       </div>
     </div>
 
-{% endfor %}
 {% endblock %}
