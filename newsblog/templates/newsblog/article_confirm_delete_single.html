@@ -1,0 +1,19 @@
+{% extends 'newsblog/base.html' %}
+{% load path_tag_filter %}
+{% block content_ManyArticles %}
+
+      <div class="col-12">
+
+          <form method="post">
+	        {% csrf_token %}
+             <p>Действительно хотите удалить данную статью:</p>
+              <p> <b>{{object.title}} </b> ?</p>
+              <p>Дата последнего изменения статьи: {{object.updated_at}}</p>
+              <button type="submit" class="btn btn-success">Подтвердить</button>
+              <a href="{% url 'newsblog:listallarticles' %}" class="btn btn-success btn-warning">Отмена</a>
+          </form>
+
+      </div>
+
+
+{% endblock %}

@@ -2,7 +2,7 @@
 {% load path_tag_filter %}
 {% block content_ManyArticles %}
 
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-500 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success-emphasis">Design theme</strong>
@@ -10,10 +10,19 @@
           <div class="mb-1 text-body-secondary">{{ object.updated_at }}</div>
           <div class="mb-1 text-body-secondary">Просмотров: {{ object.view_counts }}</div>
           <p class="mb-auto">{{ object.body }}</p>
-          <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-            Продолжить чтение
-            <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-          </a>
+          <div class="row">
+           <div class="col-6">
+              <a href="{% url 'newsblog:update_single_article' object.pk %}" class="btn btn-sm btn-outline-secondary">
+                Исправить статью
+              </a>
+           </div>
+           <div class="col-6">
+              <a href="{% url 'newsblog:delete_single_article' object.pk %}" class="btn btn-sm btn-outline-secondary">
+                Удалить статью
+              </a>
+           </div>
+          </div>
+
         </div>
         <div class="col-auto d-none d-lg-block">
                    <img class="bd-placeholder-img" height="350" src="{% get_media_prefix object.preview %}"/>

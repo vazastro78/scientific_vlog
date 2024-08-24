@@ -12,7 +12,7 @@ from newsblog.models import Article
 
 class ArticleListView(ListView):
     extra_context = {
-        'title': 'Страница просмотра материалов'
+        'title': 'Страница просмотра всех статей'
     }
     template_name = 'newsblog/artile_listallarticles.html'
 
@@ -27,6 +27,9 @@ class ArticleListView(ListView):
 
 class ArticleCreateView(CreateView):
     model = Article
+    extra_context = {
+        'title': 'Страница создания новой статьи'
+    }
     fields = ("title", "slug", "body", "is_visible", "preview")
     template_name = 'newsblog/article_create_single.html'
 
@@ -51,3 +54,23 @@ class ArticleDetailView(DetailView):
         self.object.view_counts += 1
         self.object.save()
         return self.object
+
+class ArticleUpdateView(UpdateView):
+    model = Article
+    fields = ( 'title', 'body', 'is_visible', 'preview' )
+    template_name = 'newsblog/article_update_single.html'
+
+    extra_context = {
+        'title': 'Страница изменения отдельной статьи'
+    }
+    def get_success_url(self):
+        return reverse_lazy('newsblog:view_single_article',args=[self.kwargs.get('pk')])
+
+class ArticleDeleteView(DeleteView):
+    model = Article
+    extra_context = {
+        'title': 'Страница удаления отдельной статьи'
+    }
+    template_name = 'newsblog/article_confirm_delete_single.html'
+    def get_success_url(self):
+        return reverse_lazy('newsblog:listallarticles')
