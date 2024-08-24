@@ -75,11 +75,15 @@ git checkout -b django
 #git clone git@github.com:vazastro78/scientific_vlog.git
 ```
 
-### создаем проект django и приложение newsblog в нем
+### создаем проект django и приложения mainapp, newsblog в нем
 
 ```bash
 django-admin startproject config . #инициализируем проект
 pip3 install -r requirements.txt 
+
+python3 manage.py startapp mainapp
+touch mainapp/urls.py
+mkdir -p mainapp/templates/mainapp
 
 python3 manage.py startapp newsblog
 touch newsblog/urls.py
