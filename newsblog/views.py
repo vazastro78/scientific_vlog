@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
+from django.utils.timezone import now
+
 
 from pytils.translit import slugify
 from django.urls import reverse_lazy, reverse
@@ -88,7 +90,7 @@ class ArticleUpdateView(UpdateView):
     def form_valid(self, form):
         if form.is_valid():
             new_article = form.save()
-            new_article.slug = my_slugify(new_article.title, new_article.created_at)
+            new_article.updated_at = now()
             new_article.save()
         return super().form_valid(form)
 
