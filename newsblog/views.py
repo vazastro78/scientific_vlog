@@ -39,7 +39,7 @@ class ArticleCreateView(CreateView):
     def form_valid(self, form):
         if form.is_valid():
             new_article = form.save()
-            new_article.slug = slugify(new_article.title)
+            new_article.slug = slugify(new_article.title) + new_article.created_at.strftime("%Y.%m.%d-%H:%M")
             new_article.save()
         return super().form_valid(form)
 
