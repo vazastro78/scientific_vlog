@@ -7,6 +7,17 @@
 - scientific
 - astronomy
 
+
+### Настройки
+
+ - заполнение базы данных через 
+   -  python manage.py fill
+- уникальность slug через дата в нужном формате и транслитерация названия  
+   - например: 20240825-1043-saduakasova-dinara-ramazanovna 
+- в postgress создать данных
+   -  CREATE DATABASE news_blog_db  OWNER azamat;
+
+
 ### Эволюция проекта
 - [x] Созданы директории и локальное окружение
 - [x] Создана база данных в posgress
