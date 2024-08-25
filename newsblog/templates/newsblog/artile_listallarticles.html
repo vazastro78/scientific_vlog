@@ -6,11 +6,11 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-500 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success-emphasis">Design theme</strong>
-          <h3 class="mb-0">{{ object.title }}</h3>
+          <strong class="d-inline-block mb-2 text-success-emphasis">Научная статья</strong>
+          <h3 class="mb-0">{{ object.title  }}  </h3>
           <div class="mb-1 text-body-secondary">{{ object.updated_at }}</div>
           <div class="mb-1 text-body-secondary">Просмотров: {{ object.view_counts }}</div>
-          <p class="mb-auto">{{ object.body }}</p>
+          <p class="mb-auto">{{ object.body | slice:100 }} ... </p>
           <a href="{% url 'newsblog:view_single_article' object.pk %}" class="icon-link gap-1 icon-link-hover stretched-link">
             Продолжить чтение
             <svg class="bi"><use xlink:href="#chevron-right"/></svg>

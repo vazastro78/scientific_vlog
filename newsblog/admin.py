@@ -5,8 +5,8 @@ from newsblog.models import Article
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-#    list_display = ("title", "body", "created_at", "updated_at", "is_visible", "view_counts")
-    list_display = ("title", "body", "preview", "is_visible")
-    list_filter = ('is_visible',)
+    list_display = ("title", "body", "slug", "view_counts",  "created_at", "updated_at", "is_visible" )
+    fields = ("title", "body", "preview", "is_visible" )
+    list_filter = ('is_visible', 'title')
     search_fields = ('title', 'body',)
-    
+

@@ -7,7 +7,11 @@ from django.urls import reverse_lazy, reverse
 from newsblog.models import Article
 
 
+
 # Create your views here.
+
+def my_slugify( title, created_at ):
+    return created_at.strftime("%Y%m%d-%H%M-") + slugify(title)
 
 
 class ArticleListView(ListView):
@@ -39,7 +43,7 @@ class ArticleCreateView(CreateView):
     def form_valid(self, form):
         if form.is_valid():
             new_article = form.save()
-            new_article.slug = slugify(new_article.title) + new_article.created_at.strftime("%Y.%m.%d-%H:%M")
+            new_article.slug = my_slugify(new_article.created_at, new_article.title)
             new_article.save()
         return super().form_valid(form)
 
@@ -65,6 +69,14 @@ class ArticleUpdateView(UpdateView):
     }
     def get_success_url(self):
         return reverse_lazy('newsblog:view_single_article',args=[self.kwargs.get('pk')])
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_article = form.save()
+            new_article.slug = my_slugify(new_article.created_at, new_article.title)
+            new_article.save()
+        return super().form_valid(form)
+
 
 class ArticleDeleteView(DeleteView):
     model = Article
