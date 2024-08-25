@@ -14,6 +14,7 @@ def my_slugify( title, created_at ):
     return created_at.strftime("%Y%m%d-%H%M-") + slugify(title)
 
 
+
 class ArticleListView(ListView):
     extra_context = {
         'title': 'Страница просмотра всех статей'
@@ -26,6 +27,20 @@ class ArticleListView(ListView):
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
         queryset = queryset.filter(is_visible=True)
+        return queryset
+
+class ArticleListViewNegative(ListView):
+    extra_context = {
+        'title': 'Страница просмотра всех удаленных статей'
+    }
+    template_name = 'newsblog/artile_listallarticles.html'
+
+
+    model = Article
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_visible=False)
         return queryset
 
 
@@ -43,7 +58,7 @@ class ArticleCreateView(CreateView):
     def form_valid(self, form):
         if form.is_valid():
             new_article = form.save()
-            new_article.slug = my_slugify(new_article.created_at, new_article.title)
+            new_article.slug = my_slugify(new_article.title, new_article.created_at)
             new_article.save()
         return super().form_valid(form)
 
@@ -73,7 +88,7 @@ class ArticleUpdateView(UpdateView):
     def form_valid(self, form):
         if form.is_valid():
             new_article = form.save()
-            new_article.slug = my_slugify(new_article.created_at, new_article.title)
+            new_article.slug = my_slugify(new_article.title, new_article.created_at)
             new_article.save()
         return super().form_valid(form)
 

@@ -1,33 +1,43 @@
 {% extends 'newsblog/base.html' %}
 {% load path_tag_filter %}
 {% block content_ManyArticles %}
+      <article class="blog-post">
+        <div class="col-auto d-none d-lg-block">
+                   <img class="bd-placeholder-img" height="350" src="{% get_media_prefix object.preview %}"/>
+        </div>
 
-    <div class="col-md-8">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-500 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success-emphasis">Научная статья</strong>
-          <h3 class="mb-0">{{ object.title }}</h3>
-          <div class="mb-1 text-body-secondary">{{ object.updated_at }}</div>
-          <div class="mb-1 text-body-secondary">Просмотров: {{ object.view_counts }}</div>
-          <p class="mb-auto">{{ object.body }}</p>
+        <h2 class="display-5 link-body-emphasis mb-1">{{ object.title }}</h2>
+        <p class="blog-post-meta">{{ object.updated_at }} <a href="#">Mark</a></p>
+        <p class="blog-post-meta">
           <div class="row">
-           <div class="col-6">
+           <div class="col-2">
+               Просмотров: {{ object.view_counts }}
+           </div>
+           <div class="col-2">
               <a href="{% url 'newsblog:update_single_article' object.pk %}" class="btn btn-sm btn-outline-secondary">
                 Исправить статью
               </a>
            </div>
-           <div class="col-6">
+           <div class="col-2">
               <a href="{% url 'newsblog:delete_single_article' object.pk %}" class="btn btn-sm btn-outline-secondary">
                 Удалить статью
               </a>
            </div>
           </div>
+       </p>
 
-        </div>
-        <div class="col-auto d-none d-lg-block">
-                   <img class="bd-placeholder-img" height="350" src="{% get_media_prefix object.preview %}"/>
-        </div>
-      </div>
-    </div>
+
+          <div class="row">
+           <div class="col-8">
+
+        <p>
+            {{ object.body|linebreaks }}
+        </p>
+           </div>
+          </div>
+
+      </article>
+
+
 
 {% endblock %}
