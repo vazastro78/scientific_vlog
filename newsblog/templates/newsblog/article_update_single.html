@@ -2,7 +2,7 @@
 {% load path_tag_filter %}
 {% block content_ManyArticles %}
 
-          <form method="post">
+          <form  method="post" enctype="multipart/form-data">
 	        {% csrf_token %}
              {{ form.as_p }}
               <button type="submit" class="btn btn-success">Сохранить</button>
